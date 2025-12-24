@@ -2,7 +2,7 @@ import 'server-only';
 
 import { auth } from '@clerk/nextjs/server';
 import { db } from '@/db';
-import { transactionsTable } from '@/db/schema';
+import { categoriesTable, transactionsTable } from '@/db/schema';
 import { and, desc, eq, gte, lte } from 'drizzle-orm';
 import { format } from 'date-fns';
 
@@ -19,10 +19,17 @@ export const getTransactionByMonth = async ({
     return null;
   }
   const earliestDate = new Date(year, month - 1, 1);
-  const latestDate = new Date(year, month, 0);
+  const latestDate = new Date(year, month, 0, 23, 59, 59, 999);
 
   const transactions = await db
-    .select()
+    .select({
+      id: transactionsTable.id,
+      description: transactionsTable.description,
+      amount: transactionsTable.amount,
+      transactionDate: transactionsTable.transactionDate,
+      category: categoriesTable.name,
+      transactionType: categoriesTable.type,
+    })
     .from(transactionsTable)
     .where(
       and(
@@ -31,7 +38,8 @@ export const getTransactionByMonth = async ({
         lte(transactionsTable.transactionDate, format(latestDate, 'yyyy-MM-dd'))
       )
     )
-    .orderBy(desc(transactionsTable.transactionDate));
+    .orderBy(desc(transactionsTable.transactionDate))
+    .leftJoin(categoriesTable, eq(transactionsTable.categoryId, categoriesTable.id));
 
   return transactions;
 };
