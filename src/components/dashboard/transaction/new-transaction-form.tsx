@@ -6,8 +6,10 @@ import { createTransaction } from '@/server-actions/create-transaction';
 import { format } from 'date-fns';
 import z from 'zod';
 import { toast } from 'sonner';
-
+import { useRouter } from 'next/navigation';
 const NewTransactionForm = ({ categories }: { categories: Category[] }) => {
+  const router = useRouter();
+
   const handleSubmit = async (data: z.infer<typeof transactionFormSchema>) => {
     const result = await createTransaction({
       amount: data.amount,
@@ -17,11 +19,21 @@ const NewTransactionForm = ({ categories }: { categories: Category[] }) => {
     });
 
     if (result.error) {
-      toast.warning('Error', {
+      toast.error('Error', {
         description: result.message,
       });
+      return;
     }
-    console.log(result.id);
+    toast.success('Success', {
+      description: result.message,
+    });
+
+    const transactionMonth = data.transactionDate.getMonth() + 1;
+    const transactionYear = data.transactionDate.getFullYear();
+
+    router.push(
+      `/dashboard/transactions?month=${transactionMonth}&year=${transactionYear}`
+    );
   };
 
   return <TransactionForm categories={categories} onSubmit={handleSubmit} />;
