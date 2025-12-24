@@ -23,6 +23,8 @@ import Link from 'next/link';
 import z from 'zod';
 import numeral from 'numeral';
 import { Badge } from '@/components/ui/badge';
+import Filters from '@/components/dashboard/transactions/filter';
+import { getTransactionYearsRange } from '@/data/getTransactionYearsRange';
 
 type Props = {
   searchParams: Promise<{ year?: string; month?: string }>;
@@ -51,6 +53,8 @@ const TransactionsPage = async ({ searchParams }: Props) => {
 
   const transactions = await getTransactionByMonth({ month, year });
 
+  const yearsRange = await getTransactionYearsRange();
+
   return (
     <div className="max-w-7xl mx-auto py-10">
       <Breadcrumb>
@@ -67,11 +71,16 @@ const TransactionsPage = async ({ searchParams }: Props) => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+
+      {/* Card for Transactions */}
+
       <Card className="mt-4">
         <CardHeader>
           <CardTitle className="flex justify-between">
             <span>{format(selectedDate, 'MMM yyyy')} Transactions</span>
-            <div>dropdowns</div>
+            <div>
+              <Filters year={year} month={month} yearsRange={yearsRange} />
+            </div>
           </CardTitle>
         </CardHeader>
         <CardContent>
