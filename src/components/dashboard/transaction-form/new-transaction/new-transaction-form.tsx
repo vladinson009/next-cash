@@ -1,16 +1,18 @@
 'use client';
 
 import { type Category } from '@/types/Category';
-import TransactionForm, { transactionFormSchema } from './transaction-form';
+import TransactionForm from '../transaction-form';
 import { createTransaction } from '@/server-actions/create-transaction';
 import { format } from 'date-fns';
 import z from 'zod';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { transactionInFormSchema } from '@/validation/transactionInFormSchema';
+
 const NewTransactionForm = ({ categories }: { categories: Category[] }) => {
   const router = useRouter();
 
-  const handleSubmit = async (data: z.infer<typeof transactionFormSchema>) => {
+  const handleSubmit = async (data: z.infer<typeof transactionInFormSchema>) => {
     const result = await createTransaction({
       amount: data.amount,
       transactionDate: format(data.transactionDate, 'yyyy-MM-dd'),

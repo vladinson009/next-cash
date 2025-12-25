@@ -21,51 +21,35 @@ import {
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { type Category } from '@/types/Category';
+import { transactionInFormSchema } from '@/validation/transactionInFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { addDays, format } from 'date-fns';
+import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 
-// type TransactionFormInputType = z.input<typeof transactionFormSchema>;
-// type TransactionFormOutputType = z.output<typeof transactionFormSchema>;
 type Props = {
   categories: Category[];
-  onSubmit: (data: z.infer<typeof transactionFormSchema>) => Promise<void>;
+  onSubmit: (data: z.infer<typeof transactionInFormSchema>) => Promise<void>;
+  defaultValues?: {
+    transactionType: 'income' | 'expense';
+    amount: number;
+    categoryId: number;
+    description: string;
+    transactionDate: Date;
+  };
 };
-export const transactionFormSchema = z.object({
-  transactionType: z.enum(['income', 'expense']),
-  categoryId: z.coerce
-    .number<number>('Please select a category')
-    .positive('Please select a category'),
-  transactionDate: z.coerce
-    .date<Date>()
-    .max(addDays(new Date(), 1), 'Transaction date cannot be in the future'),
-  amount: z.coerce
-    .number<number>('Please type a number')
-    .positive('Amount must be greater than 0'),
-  // amount: z.preprocess(
-  //   (val) => (val === '' ? '' : Number(val)),
-  //   z
-  //     .number({ error: 'Please type a number' })
-  //     .positive('Amount must be greater than 0')
-  // ),
 
-  description: z
-    .string()
-    .min(3, 'Description must contain at least 3 characters')
-    .max(300, 'Description must contain a maximum of 300 characters'),
-});
-
-const TransactionForm = ({ categories, onSubmit }: Props) => {
-  const form = useForm<z.infer<typeof transactionFormSchema>>({
-    resolver: zodResolver(transactionFormSchema),
+const TransactionForm = ({ categories, onSubmit, defaultValues }: Props) => {
+  const form = useForm<z.infer<typeof transactionInFormSchema>>({
+    resolver: zodResolver(transactionInFormSchema),
     defaultValues: {
       amount: 0,
       categoryId: undefined,
       description: '',
       transactionDate: new Date(),
       transactionType: 'expense',
+      ...defaultValues,
     },
   });
   const transactioinType = useWatch({
