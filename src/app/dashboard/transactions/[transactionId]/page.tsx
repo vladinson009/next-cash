@@ -1,4 +1,5 @@
 import { EditTransactionForm } from '@/components/dashboard/transaction-form/edit-transaction/edit-transaction-form';
+import DeleteTransactionDialog from '@/components/dashboard/transactions/delete-transaction-dialog';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -27,8 +28,6 @@ const EditTransactionPage = async ({
 
   const categories = await getCategories();
   const transaction = await getTransaction(transactionId);
-  console.log('Transaction from page');
-  console.log(transaction);
 
   if (!transaction) {
     notFound();
@@ -61,7 +60,14 @@ const EditTransactionPage = async ({
 
       <Card className="mt-4 max-w-3xl">
         <CardHeader>
-          <CardTitle>Edit Transaction</CardTitle>
+          <CardTitle className="flex justify-between">
+            <span>Edit Transaction</span>
+            <DeleteTransactionDialog
+              transactionId={transaction.id}
+              transactionDate={transaction.transactionDate}
+              transactionDescription={transaction.description}
+            />
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <EditTransactionForm categories={categories} transaction={transaction} />
