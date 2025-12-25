@@ -1,4 +1,4 @@
-import NewTransactionForm from '@/components/dashboard/new-transaction/new-transaction-form';
+import NewTransactionForm from '@/components/dashboard/transaction-form/new-transaction/new-transaction-form';
 import {
   Breadcrumb,
   BreadcrumbItem,
