@@ -1,8 +1,9 @@
+import 'server-only';
+
 import { db } from '@/db';
 import { transactionsTable } from '@/db/schema';
 import { auth } from '@clerk/nextjs/server';
 import { and, eq } from 'drizzle-orm';
-import 'server-only';
 
 export const getTransaction = async (transactionId: number) => {
   const { userId } = await auth();
