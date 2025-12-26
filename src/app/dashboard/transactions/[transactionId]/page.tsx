@@ -4,7 +4,6 @@ import DeleteTransactionDialog from '@/components/dashboard/transactions/delete-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getCategories } from '@/data/getCategories';
 import { getTransaction } from '@/data/getTransaction';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const EditTransactionPage = async ({
