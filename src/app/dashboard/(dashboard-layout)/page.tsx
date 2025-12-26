@@ -13,11 +13,10 @@ const DashboardPage = async ({ searchParams }: Props) => {
   const cfYear = Number.isFinite(parsedYear) ? parsedYear : today.getFullYear();
 
   return (
-    <div className="max-w-7xl mx-auto py-5">
-      <h1 className="text-4xl font-semibold pb-5">Dashboard</h1>
+    <>
       <Cashflow year={cfYear} />
       <RecentTransactions />
-    </div>
+    </>
   );
 };
 
