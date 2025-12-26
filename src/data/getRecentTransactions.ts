@@ -1,8 +1,9 @@
+import 'server-only';
+
 import { db } from '@/db';
 import { categoriesTable, transactionsTable } from '@/db/schema';
 import { auth } from '@clerk/nextjs/server';
 import { desc, eq } from 'drizzle-orm';
-import 'server-only';
 
 export const getRecentTransactions = async () => {
   const { userId } = await auth();

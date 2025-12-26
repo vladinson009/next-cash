@@ -1,49 +1,25 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
-import { getTransactionByMonth } from '@/data/getTransactionsByMonth';
 import { format } from 'date-fns';
 import Link from 'next/link';
-import z from 'zod';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Filters from '@/components/dashboard/transactions/filtered-transaction';
-import { getTransactionYearsRange } from '@/data/getTransactionYearsRange';
 import { TransactionsTable } from '@/components/dashboard/transactions/transactions-table';
+
+import { getTransactionByMonth } from '@/data/getTransactionsByMonth';
+import { getTransactionYearsRange } from '@/data/getTransactionYearsRange';
+import { searchSchema } from '@/validation/searchTransactionsSchema';
 
 type Props = {
   searchParams: Promise<{ year?: string; month?: string }>;
 };
-
-const today = new Date();
-
-const searchSchema = z.object({
-  year: z.coerce
-    .number<number>()
-    .min(today.getFullYear() - 100)
-    .max(today.getFullYear() + 1)
-    .catch(today.getFullYear()),
-  month: z.coerce
-    .number<number>()
-    .min(1)
-    .max(12)
-    .catch(today.getMonth() + 1),
-});
 
 const TransactionsPage = async ({ searchParams }: Props) => {
   const searchParamsValue = await searchParams;
   const { month, year } = searchSchema.parse(searchParamsValue);
 
   const selectedDate = new Date(year, month - 1, 1);
-
   const transactions = await getTransactionByMonth({ month, year });
-
   const yearsRange = await getTransactionYearsRange();
 
   return (

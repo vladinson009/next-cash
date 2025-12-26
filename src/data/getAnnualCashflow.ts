@@ -1,8 +1,9 @@
+import 'server-only';
+
 import { db } from '@/db';
 import { categoriesTable, transactionsTable } from '@/db/schema';
 import { auth } from '@clerk/nextjs/server';
 import { and, eq, sql, sum } from 'drizzle-orm';
-import 'server-only';
 
 export const getAnnualCashflow = async (year: number) => {
   const { userId } = await auth();

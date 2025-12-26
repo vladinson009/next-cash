@@ -4,6 +4,7 @@ import RecentTransactions from '@/components/dashboard/transactions/recent-trans
 type Props = {
   searchParams: Promise<{ cfyear: string }>;
 };
+
 const DashboardPage = async ({ searchParams }: Props) => {
   const searchParamsValue = await searchParams;
 
