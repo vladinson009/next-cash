@@ -7,7 +7,6 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import Link from 'next/link';
-import { ReactElement } from 'react';
 import type { PropsWithChildren } from 'react';
 
 const Layout = ({ children }: PropsWithChildren) => {
