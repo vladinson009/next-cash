@@ -7,9 +7,9 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import Link from 'next/link';
-import { ReactElement } from 'react';
+import type { PropsWithChildren } from 'react';
 
-const Layout = ({ children }: { children: ReactElement }) => {
+const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="max-w-7xl mx-auto py-10">
       <Breadcrumb>
