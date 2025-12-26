@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getRecentTransactions } from '@/data/getRecentTransactions';
 import Link from 'next/link';
-import { TransactionsTable } from './transactions-table';
+import { TransactionsTable } from '@/components/dashboard/transactions/transactions-table';
 
 const RecentTransactions = async () => {
   const recentTransactions = await getRecentTransactions();
@@ -23,7 +23,15 @@ const RecentTransactions = async () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <TransactionsTable transactions={recentTransactions} isEdit={false} />
+        {!recentTransactions?.length && (
+          <p className="text-center py-10 text-lg text-muted-foreground">
+            You have no transactions yet. Start by hitting &quot;Create new&quot; to
+            create yout first transaction
+          </p>
+        )}
+        {!!recentTransactions?.length && (
+          <TransactionsTable transactions={recentTransactions} isEdit={false} />
+        )}
       </CardContent>
     </Card>
   );
