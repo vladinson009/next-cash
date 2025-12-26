@@ -8,23 +8,14 @@ import {
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+
 import { getTransactionByMonth } from '@/data/getTransactionsByMonth';
 import { format } from 'date-fns';
-import { PencilIcon } from 'lucide-react';
 import Link from 'next/link';
 import z from 'zod';
-import numeral from 'numeral';
-import { Badge } from '@/components/ui/badge';
-import Filters from '@/components/dashboard/transactions/filter';
+import Filters from '@/components/dashboard/transactions/filtered-transaction';
 import { getTransactionYearsRange } from '@/data/getTransactionYearsRange';
+import { TransactionsTable } from '@/components/dashboard/transactions/transactions-table';
 
 type Props = {
   searchParams: Promise<{ year?: string; month?: string }>;
@@ -93,55 +84,7 @@ const TransactionsPage = async ({ searchParams }: Props) => {
             </p>
           )}
           {!!transactions?.length && (
-            <Table className="mt-4">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Description</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead />
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {transactions.map((transaction) => (
-                  <TableRow key={transaction.id}>
-                    <TableCell>
-                      {format(transaction.transactionDate, 'do MMM yyyy')}
-                    </TableCell>
-                    <TableCell>{transaction.description}</TableCell>
-                    <TableCell className="capitalize">
-                      <Badge
-                        className={
-                          transaction.transactionType === 'income'
-                            ? 'bg-lime-500'
-                            : 'bg-orange-500'
-                        }
-                      >
-                        {transaction.transactionType}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{transaction.category}</TableCell>
-                    <TableCell>
-                      € {numeral(transaction.amount).format('0,0[.]00')}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Button
-                        variant="outline"
-                        asChild
-                        size="icon"
-                        aria-label="Edit transaction"
-                      >
-                        <Link href={`/dashboard/transactions/${transaction.id}`}>
-                          <PencilIcon />
-                        </Link>
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <TransactionsTable transactions={transactions} isEdit={true} />
           )}
         </CardContent>
       </Card>
