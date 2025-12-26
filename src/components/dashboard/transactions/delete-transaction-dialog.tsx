@@ -11,7 +11,6 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Toaster } from '@/components/ui/sonner';
 import { deleteTransaction } from '@/server-actions/delete-transaction';
 import { Trash2Icon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
