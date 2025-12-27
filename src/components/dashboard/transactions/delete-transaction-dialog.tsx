@@ -45,7 +45,7 @@ const DeleteTransactionDialog = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="icon">
+        <Button className="cursor-pointer" variant="destructive" size="icon">
           <Trash2Icon />
         </Button>
       </AlertDialogTrigger>
@@ -58,8 +58,12 @@ const DeleteTransactionDialog = ({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button onClick={handleDeleteConfirm} variant="destructive">
+          <AlertDialogCancel className="cursor-pointer">Cancel</AlertDialogCancel>
+          <Button
+            className="cursor-pointer"
+            onClick={handleDeleteConfirm}
+            variant="destructive"
+          >
             Delete
           </Button>
         </AlertDialogFooter>

@@ -210,7 +210,12 @@ const TransactionForm = ({ categories, onSubmit, defaultValues }: Props) => {
               );
             }}
           />
-          <Button type="submit">
+          <Button
+            className={
+              form.formState.isSubmitting ? 'cursor-progress' : 'cursor-pointer'
+            }
+            type="submit"
+          >
             {form.formState.isSubmitting ? 'Thinking...' : 'Submit'}
           </Button>
         </fieldset>

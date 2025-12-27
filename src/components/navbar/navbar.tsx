@@ -13,10 +13,10 @@ const Navbar = () => {
       <div>
         <SignedOut>
           <div className="flex items-center">
-            <Button asChild variant="link" className="text-white">
+            <Button asChild variant="link" className="text-white cursor-pointer">
               <SignInButton />
             </Button>
-            <Button asChild variant="link" className="text-white">
+            <Button asChild variant="link" className="text-white cursor-pointer">
               <SignUpButton />
             </Button>
           </div>

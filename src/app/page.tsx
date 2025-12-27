@@ -26,10 +26,14 @@ export default function Home() {
         </SignedIn>
         <SignedOut>
           <div className="flex gap-2 items-center justify-center">
-            <Button className="bg-lime-600 hover:bg-lime-500" asChild size="lg">
+            <Button
+              className="bg-lime-600 hover:bg-lime-500 cursor-pointer"
+              asChild
+              size="lg"
+            >
               <SignInButton />
             </Button>
-            <Button asChild size="lg">
+            <Button className="cursor-pointer" asChild size="lg">
               <SignUpButton />
             </Button>
           </div>

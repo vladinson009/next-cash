@@ -59,8 +59,6 @@ export const EditTransactionForm = ({ categories, transaction }: Props) => {
       categories.find((category) => category.id === transaction.categoryId)?.type ??
       'income',
   };
-  console.log(defaultValues);
-
   return (
     <TransactionForm
       defaultValues={defaultValues}
