@@ -8,11 +8,11 @@ const RecentTransactions = async () => {
   const recentTransactions = await getRecentTransactions();
 
   return (
-    <Card>
+    <Card className="mx-1">
       <CardHeader>
         <CardTitle className="flex justify-between">
           <span>Recent Transactions</span>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <Button asChild variant="outline">
               <Link href="/dashboard/transactions">View All</Link>
             </Button>

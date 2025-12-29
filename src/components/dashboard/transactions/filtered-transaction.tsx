@@ -23,7 +23,7 @@ const Filters = ({
   const [selectedMonth, setSelectedMonth] = useState(month);
   const [selectedYear, setSelectedYear] = useState(year);
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1 flex-wrap">
       {/* Select for the month */}
       <Select
         value={selectedMonth.toString()}

@@ -25,20 +25,18 @@ export const TransactionsTable = ({ transactions, isEdit }: Props) => {
       <TableHeader>
         <TableRow>
           <TableHead>Date</TableHead>
-          <TableHead>Description</TableHead>
-          <TableHead>Type</TableHead>
-          <TableHead>Category</TableHead>
+          {/* <TableHead>Type</TableHead> */}
           <TableHead>Amount</TableHead>
+          <TableHead>Category</TableHead>
+          <TableHead>Description</TableHead>
           {isEdit && <TableHead />}
         </TableRow>
       </TableHeader>
       <TableBody>
         {transactions.map((transaction) => (
           <TableRow key={transaction.id}>
-            <TableCell>
-              {format(transaction.transactionDate, 'do MMM yyyy')}
-            </TableCell>
-            <TableCell>{transaction.description}</TableCell>
+            <TableCell>{format(transaction.transactionDate, 'dd MMM')}</TableCell>
+
             <TableCell className="capitalize">
               <Badge
                 className={
@@ -47,11 +45,12 @@ export const TransactionsTable = ({ transactions, isEdit }: Props) => {
                     : 'bg-orange-500'
                 }
               >
-                {transaction.transactionType}
+                € {numeral(transaction.amount).format('0,0[.]00')}
               </Badge>
             </TableCell>
+            {/* <TableCell>€ {numeral(transaction.amount).format('0,0[.]00')}</TableCell> */}
             <TableCell>{transaction.category}</TableCell>
-            <TableCell>€ {numeral(transaction.amount).format('0,0[.]00')}</TableCell>
+            <TableCell>{transaction.description}</TableCell>
             {isEdit && (
               <TableCell className="text-right">
                 <Button

@@ -12,7 +12,7 @@ const LayoutPage = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="max-w-7xl mx-auto py-10">
       {/* Breadcrumb navigation */}
-      <Breadcrumb>
+      <Breadcrumb className="mx-1">
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>

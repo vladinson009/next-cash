@@ -12,7 +12,7 @@ import type { PropsWithChildren } from 'react';
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="max-w-7xl mx-auto py-10">
-      <Breadcrumb>
+      <Breadcrumb className="mx-1">
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>

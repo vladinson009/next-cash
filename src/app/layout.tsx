@@ -27,9 +27,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${poppins.variable} antialiased`}>
+        <body
+          className={`${poppins.variable} antialiased flex flex-col min-h-screen`}
+        >
           <Navbar />
-          <div className="min-h-100 h-[calc(100vh-160px)]">{children}</div>
+          <div className=" grow">{children}</div>
           <Footer />
           <Toaster />
         </body>

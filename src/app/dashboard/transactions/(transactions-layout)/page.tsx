@@ -23,7 +23,7 @@ const TransactionsPage = async ({ searchParams }: Props) => {
   const yearsRange = await getTransactionYearsRange();
 
   return (
-    <Card className="mt-4">
+    <Card className="mt-4 mx-1">
       <CardHeader>
         <CardTitle className="flex justify-between">
           <span>{format(selectedDate, 'MMM yyyy')} Transactions</span>

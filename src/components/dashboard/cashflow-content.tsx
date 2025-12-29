@@ -30,7 +30,7 @@ export const CashflowContent = ({ annualCashflow }: Props) => {
             color: '#f97316',
           },
         }}
-        className="w-full h-75"
+        className="flex-2/3"
       >
         <BarChart data={annualCashflow}>
           <CartesianGrid vertical={false} />
@@ -71,7 +71,7 @@ export const CashflowContent = ({ annualCashflow }: Props) => {
           <Bar dataKey="expenses" radius={4} fill="var(--color-expenses)" />
         </BarChart>
       </ChartContainer>
-      <div className="border-l px-4 flex flex-col gap-4 justify-center">
+      <div className="border-l px-4 flex flex-col gap-4 justify-center flex-1/6">
         <div>
           <span className="text-muted-foreground font-bold text-sm">Income</span>
           <h2 className="text-3xl">

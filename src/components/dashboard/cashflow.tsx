@@ -13,14 +13,15 @@ export const Cashflow = async ({ year }: Props) => {
   ]);
 
   return (
-    <Card className="mb-5">
+    <Card className="mb-5 mx-1">
       <CardHeader>
         <CardTitle className="flex justify-between">
           <span>Cashflow</span>
           <CashflowFilters yearsRange={yearsRange} year={year} />
         </CardTitle>
       </CardHeader>
-      <CardContent className="grid grid-cols-[1fr_250px]">
+      {/* <CardContent className="grid md:grid-cols-[1fr_250px] "> */}
+      <CardContent className="flex flex-col md:flex-row">
         <CashflowContent annualCashflow={cashflow} />
       </CardContent>
     </Card>

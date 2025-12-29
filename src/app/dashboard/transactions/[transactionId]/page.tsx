@@ -26,7 +26,7 @@ const EditTransactionPage = async ({
   }
 
   return (
-    <Card className="mt-4 max-w-3xl">
+    <Card className="max-w-3xl mx-1 md:mx-auto mt-4">
       <CardHeader>
         <CardTitle className="flex justify-between">
           <span>Edit Transaction</span>

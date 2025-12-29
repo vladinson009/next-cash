@@ -65,7 +65,7 @@ const TransactionForm = ({ categories, onSubmit, defaultValues }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <fieldset
           disabled={form.formState.isSubmitting}
-          className="grid grid-cols-2 gap-y-5 gap-x-2"
+          className="flex flex-col gap-y-5 gap-x-2 sm:grid sm:grid-cols-2"
         >
           <FormField
             control={form.control}
@@ -211,9 +211,10 @@ const TransactionForm = ({ categories, onSubmit, defaultValues }: Props) => {
             }}
           />
           <Button
-            className={
-              form.formState.isSubmitting ? 'cursor-progress' : 'cursor-pointer'
-            }
+            className={cn(
+              form.formState.isSubmitting ? 'cursor-progress' : 'cursor-pointer',
+              'mx-auto'
+            )}
             type="submit"
           >
             {form.formState.isSubmitting ? 'Thinking...' : 'Submit'}
